@@ -1,8 +1,20 @@
 import React from "react";
 
 const Signup = () => {
+    const handleUserRegister = (e) => {
+        e.preventDefault();
 
-    const 
+        const form = e.target;
+
+        const fName = form.fName.value;
+        const lName = form.lName.value;
+        const fullName = fName + " " + lName;
+
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(fullName, email, password);
+    };
 
     return (
         <div className="max-w-7xl mx-auto min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
@@ -259,7 +271,7 @@ const Signup = () => {
                                             type="text"
                                             className="w-full -ml-10 pl-2 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                                             placeholder="Smith"
-                                            name="LName"
+                                            name="lName"
                                             required
                                         />
                                     </div>

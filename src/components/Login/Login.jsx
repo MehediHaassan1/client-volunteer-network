@@ -2,6 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+    const handleUserLogin = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(email, password);
+    };
+
     return (
         <>
             <section className="-z-50 flex flex-col md:flex-row h-screen items-center max-w-7xl mx-auto">
@@ -22,7 +32,7 @@ const Login = () => {
                             Log in to your account
                         </h1>
 
-                        <form className="mt-6" action="#" method="POST">
+                        <form className="mt-6" onSubmit={handleUserLogin}>
                             <div>
                                 <label className="block text-gray-700">
                                     Email Address
@@ -34,7 +44,6 @@ const Login = () => {
                                     placeholder="Enter Email Address"
                                     className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
                                     autoFocus
-                                    autoComplete
                                     required
                                 />
                             </div>
@@ -57,8 +66,8 @@ const Login = () => {
 
                             <div className="text-right mt-2">
                                 <Link
-                                to='/'
-                                className="text-sm font-semibold text-gray-700 
+                                    to="/"
+                                    className="text-sm font-semibold text-gray-700 
                                 hover:text-blue-700 focus:text-blue-700"
                                 >
                                     Forgot Password?
@@ -126,7 +135,7 @@ const Login = () => {
                         <p className="mt-8">
                             Need an account?{" "}
                             <Link
-                                to='/signup'
+                                to="/signup"
                                 className="text-blue-500 hover:text-blue-700 font-semibold"
                             >
                                 Create an account
