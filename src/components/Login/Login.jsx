@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
+    const { signInUser, googleSignIn } = useContext(UserContext);
     const handleUserLogin = (e) => {
         e.preventDefault();
 
@@ -9,7 +12,31 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(email, password);
+        signInUser(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                if (user) {
+                    toast.success("Login Successfully!");
+                }
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
+    };
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then((result) => {
+                const user = result.user;
+                if (user) {
+                    toast.success("Login Successfully!");
+                }
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
     };
 
     return (
@@ -86,6 +113,7 @@ const Login = () => {
                         <hr className="my-6 border-gray-300 w-full" />
 
                         <button
+                            onClick={handleGoogleSignIn}
                             type="button"
                             className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300"
                         >
