@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/logos/Group 1329.png";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/AuthProvider";
+import toast from "react-hot-toast";
 
 const NavBar = () => {
+    const { user, signOutUser } = useContext(UserContext);
+
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                toast.success("Logout Successfully!");
+            })
+            .catch((error) => {});
+    };
+
     const navItems = (
         <>
             <li className="mx-2 font-semibold px-1 py-1">
@@ -17,9 +29,19 @@ const NavBar = () => {
             <li className="mx-2 font-semibold px-1 py-1">
                 <Link to="/blog">Blog</Link>
             </li>
-            <li className="mx-2 font-semibold bg-blue-200 px-1 py-1 rounded">
-                <Link to="/login">Login</Link>
-            </li>
+            {user ? (
+                <li
+                    onClick={handleSignOut}
+                    className="mx-2 font-semibold bg-blue-200 px-1 py-1 rounded"
+                >
+                    <Link>Logout</Link>
+                </li>
+            ) : (
+                <li className="mx-2 font-semibold bg-blue-200 px-1 py-1 rounded">
+                    <Link to="/login">Login</Link>
+                </li>
+            )}
+
             <li className="mx-2 font-semibold bg-yellow-200 px-1 py-1 rounded">
                 <Link to="/admin">Admin</Link>
             </li>

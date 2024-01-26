@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../context/AuthProvider";
 
 const Signup = () => {
+    const { createUser } = useContext(UserContext);
     const handleUserRegister = (e) => {
         e.preventDefault();
 
@@ -13,7 +15,16 @@ const Signup = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(fullName, email, password);
+        createUser(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                user.displayName = fullName;
+
+                console.log(user.displayName)
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -317,6 +328,7 @@ const Signup = () => {
                                             placeholder="************"
                                             name="password"
                                             required
+                                            minLength="6"
                                         />
                                     </div>
                                 </div>
@@ -326,7 +338,7 @@ const Signup = () => {
                                     <input
                                         type="submit"
                                         value="REGISTER NOW"
-                                        className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                                        className="cursor-pointer block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
                                     />
                                 </div>
                             </div>
