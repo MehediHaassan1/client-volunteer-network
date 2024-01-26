@@ -18,7 +18,7 @@ const NavBar = () => {
                 <Link to="/blog">Blog</Link>
             </li>
             <li className="mx-2 font-semibold bg-blue-200 px-1 py-1 rounded">
-                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
             </li>
             <li className="mx-2 font-semibold bg-yellow-200 px-1 py-1 rounded">
                 <Link to="/admin">Admin</Link>
@@ -26,9 +26,9 @@ const NavBar = () => {
         </>
     );
     return (
-        <div className="navbar bg-base-100 max-w-7xl mx-auto p-0">
+        <div className="navbar bg-base-100 max-w-7xl mx-auto p-0 h-12 z-50 sticky top-0">
             <div className="navbar-start">
-                <Link to="/" className="btn btn-ghost text-xl h-20">
+                <Link to="/" className="btn btn-ghost text-xl">
                     <img src={logo} alt="logo" className="h-10" />
                 </Link>
             </div>
