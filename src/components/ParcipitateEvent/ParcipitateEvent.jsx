@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ParcipitateEvent = () => {
     const event = useLoaderData();
@@ -7,7 +8,52 @@ const ParcipitateEvent = () => {
 
     const handleEventParticipate = (e) => {
         e.preventDefault();
-        console.log("hey man are you alright?");
+        const form = e.target;
+        const participantsName = form.participantsName.value;
+        const eventsName = form.eventsName.value;
+        const date = form.date.value;
+        const participantsEmail = form.participantsEmail.value;
+        const participantsPhone = form.participantsPhone.value;
+        const eventOrganizer = form.eventOrganizer.value;
+        const eventLocation = form.eventLocation.value;
+        const participantInfo = {
+            participantsName,
+            eventsName,
+            date,
+            participantsEmail,
+            participantsPhone,
+            eventOrganizer,
+            eventLocation,
+        };
+
+        if (isNaN(participantsPhone) || participantsPhone.length < 10) {
+            Swal.fire({
+                icon: "error",
+                title: "Something went wrong!",
+                text: "Please enter correct phone number!"
+            });
+            return;
+        }
+
+        fetch("http://localhost:5000/events", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(participantInfo),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if(data.insertedId){
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your event has been saved",
+                        showConfirmButton: false,
+                        timer: 2000
+                      });
+                }
+            });
     };
 
     return (
@@ -15,11 +61,14 @@ const ParcipitateEvent = () => {
             <h1 className="text-4xl text-center my-10 font-bold">
                 Participate Event
             </h1>
-            <form className="w-2/4 mx-auto" onSubmit={handleEventParticipate}>
+            <form
+                className="lg:w-2/4 mx-auto"
+                onSubmit={handleEventParticipate}
+            >
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
-                    <div>
+                    <div className="md:col-span-2">
                         <label htmlFor="participantsName" className="font-bold">
-                            Participants Name{" "}
+                            Participants Full Name{" "}
                             <span className="text-red-600">*</span>
                         </label>
                         <input
@@ -42,6 +91,17 @@ const ParcipitateEvent = () => {
                             id="eventsName"
                             defaultValue={title}
                             readOnly
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="date" className="font-bold">
+                            Date <span className="text-red-600">*</span>
+                        </label>
+                        <input
+                            className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                            type="date"
+                            name="date"
+                            id="date"
                         />
                     </div>
                     <div>
