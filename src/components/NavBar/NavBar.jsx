@@ -11,6 +11,7 @@ const NavBar = () => {
         signOutUser()
             .then(() => {
                 toast.success("Logout Successfully!");
+                localStorage.removeItem("volunteer-network-web-access-token");
             })
             .catch((error) => {});
     };

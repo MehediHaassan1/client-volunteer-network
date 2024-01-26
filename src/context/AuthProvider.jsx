@@ -39,17 +39,37 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     };
 
-    const updateUserProfile = (fullName) =>{
+    const updateUserProfile = (fullName) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {
-            displayName: fullName
-        }).then(()=>{}).catch(()=>{})
-    }
+            displayName: fullName,
+        })
+            .then(() => {})
+            .catch(() => {});
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
+            const currentUserEmail = { email: currentUser?.email };
+            if (currentUser) {
+                fetch("http://localhost:5000/access-token", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(currentUserEmail),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        const token = data.token;
+                        localStorage.setItem(
+                            "volunteer-network-web-access-token",
+                            token
+                        );
+                    });
+            }
         });
 
         return () => {
@@ -57,7 +77,15 @@ const AuthProvider = ({ children }) => {
         };
     });
 
-    const authInfo = { user,loading, createUser, signInUser, signOutUser, googleSignIn, updateUserProfile };
+    const authInfo = {
+        user,
+        loading,
+        createUser,
+        signInUser,
+        signOutUser,
+        googleSignIn,
+        updateUserProfile,
+    };
     return (
         <UserContext.Provider value={authInfo}>{children}</UserContext.Provider>
     );

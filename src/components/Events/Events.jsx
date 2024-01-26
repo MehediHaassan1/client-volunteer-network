@@ -8,7 +8,14 @@ const Events = () => {
     const [userEvents, setUserEvents] = useState([]);
     const url = `http://localhost:5000/participant-events?email=${user.email}`;
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            method: "GET",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem(
+                    "volunteer-network-web-access-token"
+                )}`,
+            },
+        })
             .then((res) => res.json())
             .then((data) => {
                 setUserEvents(data);
@@ -38,7 +45,9 @@ const Events = () => {
                                 icon: "success",
                             });
 
-                            const remaining = userEvents.filter(event => event._id !== _id);
+                            const remaining = userEvents.filter(
+                                (event) => event._id !== _id
+                            );
                             setUserEvents(remaining);
                         }
                     });
