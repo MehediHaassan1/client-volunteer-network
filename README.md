@@ -1,8 +1,21 @@
-# React + Vite
+# Volunteer Network
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## [Live Link](https://volunteer-network-db7e5.web.app/)
 
-Currently, two official plugins are available:
+Volunteer network is a web application that serves as a platform to showcase events details.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+
+-   **Programming Language:** JavaScript
+-   **Frontend:** ReactJS
+-   **Route Management:** React router
+-   **Authentication:** Firebase
+-   **CSS framework:** Tailwind CSS
+-   **Version Control:** Git
+-   **Package Management:** npm
+
+## Features
+
+-   Feature 1: Provide a user-friendly interface to list upcoming events, including details such as event name, date, time, location, and a brief description.
+-   Feature 2: Allow event organizers to submit their events with necessary information
+-   Feature 3: Implement user accounts to enable individuals to register on the platform.

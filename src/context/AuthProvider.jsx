@@ -54,13 +54,16 @@ const AuthProvider = ({ children }) => {
             setLoading(false);
             const currentUserEmail = { email: currentUser?.email };
             if (currentUser) {
-                fetch("http://localhost:5000/access-token", {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(currentUserEmail),
-                })
+                fetch(
+                    "https://volunteer-network-qjxu.onrender.com/access-token",
+                    {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                        body: JSON.stringify(currentUserEmail),
+                    }
+                )
                     .then((res) => res.json())
                     .then((data) => {
                         const token = data.token;

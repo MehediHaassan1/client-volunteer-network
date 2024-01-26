@@ -16,7 +16,8 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch("http://localhost:5000/events"),
+                loader: () =>
+                    fetch("https://volunteer-network-qjxu.onrender.com/events"),
             },
             {
                 path: "events-details/:id",
@@ -26,7 +27,9 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/events/${params.id}`),
+                    fetch(
+                        `https://volunteer-network-qjxu.onrender.com/events/${params.id}`
+                    ),
             },
             {
                 path: "participate-events/:id",
@@ -36,7 +39,9 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/events/${params.id}`),
+                    fetch(
+                        `https://volunteer-network-qjxu.onrender.com/events/${params.id}`
+                    ),
             },
             {
                 path: "login",

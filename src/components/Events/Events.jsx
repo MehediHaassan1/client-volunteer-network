@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const Events = () => {
     const { user } = useContext(UserContext);
     const [userEvents, setUserEvents] = useState([]);
-    const url = `http://localhost:5000/participant-events?email=${user.email}`;
+    const url = `https://volunteer-network-qjxu.onrender.com/participant-events?email=${user.email}`;
     useEffect(() => {
         fetch(url, {
             method: "GET",
@@ -33,9 +33,12 @@ const Events = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/participant-events/${_id}`, {
-                    method: "DELETE",
-                })
+                fetch(
+                    `https://volunteer-network-qjxu.onrender.com/participant-events/${_id}`,
+                    {
+                        method: "DELETE",
+                    }
+                )
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.deletedCount > 0) {

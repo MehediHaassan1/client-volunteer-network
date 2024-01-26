@@ -40,13 +40,16 @@ const ParcipitateEvent = () => {
             return;
         }
 
-        fetch("http://localhost:5000/participant-events", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(participantInfo),
-        })
+        fetch(
+            "https://volunteer-network-qjxu.onrender.com/participant-events",
+            {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(participantInfo),
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 if (data.insertedId) {
