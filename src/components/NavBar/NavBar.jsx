@@ -17,10 +17,10 @@ const NavBar = () => {
             <li className="mx-2 font-semibold px-1 py-1">
                 <Link to="/blog">Blog</Link>
             </li>
-            <li className="mx-2 font-semibold bg-purple-300 px-1 py-1 rounded">
+            <li className="mx-2 font-semibold bg-blue-200 px-1 py-1 rounded">
                 <Link to="/register">Register</Link>
             </li>
-            <li className="mx-2 font-semibold bg-orange-300 px-1 py-1 rounded">
+            <li className="mx-2 font-semibold bg-yellow-200 px-1 py-1 rounded">
                 <Link to="/admin">Admin</Link>
             </li>
         </>

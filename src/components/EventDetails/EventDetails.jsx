@@ -21,8 +21,11 @@ const EventDetails = () => {
                 <b>Location : </b>
                 {location}
             </p>
-            <Link className="group inline-block">
-                <button className="hover:tracking-widest duration-300 font-bold bg-green-300 px-4 py-2 rounded hover:bg-green-500 flex items-center gap-2 ">
+            <Link
+                className="group inline-block"
+                to={`/participate-events/${_id}`}
+            >
+                <button className="hover:tracking-widest duration-300 font-bold bg-yellow-200 px-4 py-2 rounded hover:bg-yellow-300 flex items-center gap-2 ">
                     Participate{" "}
                     <span className="hidden group-hover:inline-block">
                         <FaArrowRight />
