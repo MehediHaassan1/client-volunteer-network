@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../../context/AuthProvider";
 
 const Signup = () => {
-    const { createUser } = useContext(UserContext);
+    const { createUser, updateUserProfile } = useContext(UserContext);
     const handleUserRegister = (e) => {
         e.preventDefault();
 
@@ -18,9 +18,9 @@ const Signup = () => {
         createUser(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                user.displayName = fullName;
-
-                console.log(user.displayName)
+                if (user) {
+                    updateUserProfile(fullName);
+                }
             })
             .catch((error) => {
                 console.log(error);

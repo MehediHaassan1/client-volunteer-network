@@ -40,7 +40,7 @@ const ParcipitateEvent = () => {
             return;
         }
 
-        fetch("http://localhost:5000/events", {
+        fetch("http://localhost:5000/participant-events", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -84,7 +84,7 @@ const ParcipitateEvent = () => {
                             id="participantsName"
                             readOnly
                             required
-                            defaultValue={user.displayName}
+                            defaultValue={user?.displayName}
                         />
                     </div>
                     <div>
