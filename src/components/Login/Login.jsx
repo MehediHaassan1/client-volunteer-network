@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
     const { signInUser, googleSignIn } = useContext(UserContext);
+
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
     const handleUserLogin = (e) => {
         e.preventDefault();
 
@@ -17,6 +22,7 @@ const Login = () => {
                 const user = userCredential.user;
                 if (user) {
                     toast.success("Login Successfully!");
+                    navigate(from, { replace: true });
                 }
             })
             .catch((error) => {
@@ -31,6 +37,7 @@ const Login = () => {
                 const user = result.user;
                 if (user) {
                     toast.success("Login Successfully!");
+                    navigate(from, { replace: true });
                 }
             })
             .catch((error) => {

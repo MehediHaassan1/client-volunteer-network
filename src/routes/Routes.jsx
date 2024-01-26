@@ -5,6 +5,7 @@ import EventDetails from "../components/EventDetails/EventDetails";
 import ParcipitateEvent from "../components/ParcipitateEvent/ParcipitateEvent";
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -18,13 +19,21 @@ const router = createBrowserRouter([
             },
             {
                 path: "events-details/:id",
-                element: <EventDetails></EventDetails>,
+                element: (
+                    <PrivateRoute>
+                        <EventDetails></EventDetails>
+                    </PrivateRoute>
+                ),
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/events/${params.id}`),
             },
             {
                 path: "participate-events/:id",
-                element: <ParcipitateEvent></ParcipitateEvent>,
+                element: (
+                    <PrivateRoute>
+                        <ParcipitateEvent></ParcipitateEvent>
+                    </PrivateRoute>
+                ),
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/events/${params.id}`),
             },
