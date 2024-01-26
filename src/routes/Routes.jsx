@@ -16,6 +16,8 @@ const router = createBrowserRouter([
             {
                 path: "events-details/:id",
                 element: <EventDetails></EventDetails>,
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/events/${params.id}`),
             },
         ],
     },
