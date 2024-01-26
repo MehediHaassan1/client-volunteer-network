@@ -6,6 +6,7 @@ import ParcipitateEvent from "../components/ParcipitateEvent/ParcipitateEvent";
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
+import Events from "../components/Events/Events";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
             {
                 path: "signup",
                 element: <Signup></Signup>,
+            },
+            {
+                path: "events",
+                element: (
+                    <PrivateRoute>
+                        <Events></Events>
+                    </PrivateRoute>
+                ),
             },
         ],
     },

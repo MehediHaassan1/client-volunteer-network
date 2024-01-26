@@ -1,8 +1,11 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React, { useContext } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { UserContext } from "../../context/AuthProvider";
 
 const ParcipitateEvent = () => {
+    const { user } = useContext(UserContext);
+    const navigate = useNavigate();
     const event = useLoaderData();
     const { _id, title, description, organizer, location, image } = event;
 
@@ -16,6 +19,7 @@ const ParcipitateEvent = () => {
         const participantsPhone = form.participantsPhone.value;
         const eventOrganizer = form.eventOrganizer.value;
         const eventLocation = form.eventLocation.value;
+        const eventBanner = image;
         const participantInfo = {
             participantsName,
             eventsName,
@@ -24,13 +28,14 @@ const ParcipitateEvent = () => {
             participantsPhone,
             eventOrganizer,
             eventLocation,
+            eventBanner,
         };
 
         if (isNaN(participantsPhone) || participantsPhone.length < 10) {
             Swal.fire({
                 icon: "error",
                 title: "Something went wrong!",
-                text: "Please enter correct phone number!"
+                text: "Please enter correct phone number!",
             });
             return;
         }
@@ -44,14 +49,15 @@ const ParcipitateEvent = () => {
         })
             .then((res) => res.json())
             .then((data) => {
-                if(data.insertedId){
+                if (data.insertedId) {
                     Swal.fire({
                         position: "center",
                         icon: "success",
                         title: "Your event has been saved",
                         showConfirmButton: false,
-                        timer: 2000
-                      });
+                        timer: 2000,
+                    });
+                    navigate("/");
                 }
             });
     };
@@ -76,8 +82,9 @@ const ParcipitateEvent = () => {
                             type="text"
                             name="participantsName"
                             id="participantsName"
-                            placeholder="Participants Name"
+                            readOnly
                             required
+                            defaultValue={user.displayName}
                         />
                     </div>
                     <div>
@@ -116,7 +123,7 @@ const ParcipitateEvent = () => {
                             className="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                             type="email"
                             id="participantsEmail"
-                            defaultValue={`example@gmail.com`}
+                            defaultValue={user.email}
                             readOnly
                             name="participantsEmail"
                         />
